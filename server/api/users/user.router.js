@@ -16,6 +16,11 @@ router.param('id', function (req, res, next, id) {
 	.then(null, next);
 });
 
+router.get('/', function(req, res, next) {
+	if(req.user) next();
+	else res.sendStatus(401);
+})
+
 router.get('/', function (req, res, next) {
 	User.find({}).exec()
 	.then(function (users) {
